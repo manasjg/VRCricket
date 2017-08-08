@@ -22,5 +22,9 @@ public class BallLaunch : MonoBehaviour {
         GetComponent<Rigidbody>().useGravity = true;
         GetComponent<Rigidbody>().AddForce(launchSpeed);
     }
- 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GetComponent<Rigidbody>().maxAngularVelocity = 0;
+    }
+
 }
