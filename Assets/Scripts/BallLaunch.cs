@@ -9,11 +9,12 @@ public class BallLaunch : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         GetComponent<Rigidbody>().maxAngularVelocity = av;
-	}
+        GetComponent<Rigidbody>().AddTorque(transform.forward * spin);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        GetComponent<Rigidbody>().AddTorque(transform.forward*spin );
+        
         
 
     }
@@ -22,9 +23,11 @@ public class BallLaunch : MonoBehaviour {
         GetComponent<Rigidbody>().useGravity = true;
         GetComponent<Rigidbody>().AddForce(launchSpeed);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         GetComponent<Rigidbody>().maxAngularVelocity = 0;
+        GetComponent<Rigidbody>().AddTorque(-transform.forward * spin);
+        Debug.Log(collision.gameObject.name);
     }
 
 }
