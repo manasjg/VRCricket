@@ -6,15 +6,20 @@ public class BallLaunch : MonoBehaviour {
     public Vector3 launchSpeed;
     public float spin=0f;
     public int av;
+    private SteamVR_TrackedController controller;
 	// Use this for initialization
 	void Start () {
         GetComponent<Rigidbody>().maxAngularVelocity = av;
         GetComponent<Rigidbody>().AddTorque(transform.forward * spin);
+        controller = GameObject.Find("Bat").GetComponent<SteamVR_TrackedController>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        
+        if (controller.triggerPressed)
+        {
+            ballLaunch();
+        }
         
 
     }
