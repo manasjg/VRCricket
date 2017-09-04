@@ -5,7 +5,7 @@ public class BatBoxFollower : MonoBehaviour
     private BatPhysics BatFollower;
     private Rigidbody rigidbody;
     private Vector3 velocity;
-    public SelectFielder fielder;
+    
 
    
     private float sensitivity = 100f;
@@ -31,8 +31,5 @@ public class BatBoxFollower : MonoBehaviour
         sensitivity = sens;
         BatFollower = batFollower;
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        fielder.GetClosestFielder();
-    }
+   
 }

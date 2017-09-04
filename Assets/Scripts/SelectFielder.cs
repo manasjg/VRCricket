@@ -8,19 +8,23 @@ public class SelectFielder : MonoBehaviour {
     private float mydistance;
     private float closestdist= 9999999.0F;
     private GameObject fielder;
-    public GameObject target;
+    private GameObject target;
+    public bool ballhit;
+    private void Start()
+    {
+        target = GameObject.Find("Ball1");
+    }
     private void Update()
     {
-       if(this.gameObject.name== GetClosestFielder().name)
+        if (ballhit)
         {
-            GetComponent<AICharacterControl>().SetTarget(target.transform);
+            StartCoroutine(GetClosestFielder());
         }
-
     }
 
-    public GameObject GetClosestFielder()
+    public IEnumerator GetClosestFielder()
     {
-        mydistance = Vector3.Distance(target.transform.position, transform.position);
+        yield return new WaitForSeconds(0.5f);
 
         foreach (GameObject Fielder in (GameObject.FindGameObjectsWithTag("Fielder")))
         {
@@ -32,9 +36,12 @@ public class SelectFielder : MonoBehaviour {
                 fielder = Fielder;
             }
         }
-        
-        return fielder;
-        
+
+        if (this.gameObject.name == fielder.gameObject.name)
+        {
+            GetComponent<AICharacterControl>().SetTarget(target.transform);
+        }
+
     }
     
 }

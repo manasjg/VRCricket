@@ -1,17 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class BallLaunch : MonoBehaviour {
+   
     public Vector3 launchSpeed;
     public float spin=0f;
     public int av;
+    
     private SteamVR_TrackedController controller;
 	// Use this for initialization
 	void Start () {
         GetComponent<Rigidbody>().maxAngularVelocity = av;
         GetComponent<Rigidbody>().AddTorque(transform.forward * spin);
         controller = GameObject.Find("Bat").GetComponent<SteamVR_TrackedController>();
+        
     }
 	
 	// Update is called once per frame
@@ -32,7 +36,21 @@ public class BallLaunch : MonoBehaviour {
     {
         GetComponent<Rigidbody>().maxAngularVelocity = 0;
         GetComponent<Rigidbody>().AddTorque(-transform.forward * spin);
-        Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.name != "Ground")
+        {
+          foreach(GameObject Fielder in (GameObject.FindGameObjectsWithTag("Fielder")))
+            {
+                Fielder.GetComponent<SelectFielder>().ballhit = true;
+            }
+        }
+
+        
+          
+        
     }
+   
+    
+
+  
 
 }
