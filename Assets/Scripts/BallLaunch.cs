@@ -9,6 +9,7 @@ public class BallLaunch : MonoBehaviour {
     public float spin=0f;
     public int av;
     
+    
     private SteamVR_TrackedController controller;
 	// Use this for initialization
 	void Start () {
@@ -34,14 +35,19 @@ public class BallLaunch : MonoBehaviour {
     }
     private void OnCollisionEnter(Collision collision)
     {
-        GetComponent<Rigidbody>().maxAngularVelocity = 0;
-        GetComponent<Rigidbody>().AddTorque(-transform.forward * spin);
+        
+        GetComponent<Rigidbody>().AddTorque(-transform.forward * spin*0.4f);
         if (collision.gameObject.name != "Ground")
         {
           foreach(GameObject Fielder in (GameObject.FindGameObjectsWithTag("Fielder")))
             {
                 Fielder.GetComponent<SelectFielder>().ballhit = true;
+                
+                
             }
+            GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreSystem>().InvokeScore();
+          
+
         }
 
         
