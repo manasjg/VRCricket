@@ -15,9 +15,12 @@ public class StopIncrementScore : MonoBehaviour {
 	}
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Ball1")
+        if (collision.gameObject.tag == "Fielder")
         {
+            
             GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreSystem>().CancelScoreInvoke();
+            GetComponent<Reset_Pos>().ResetPosition();
+            
         }
     }
 }

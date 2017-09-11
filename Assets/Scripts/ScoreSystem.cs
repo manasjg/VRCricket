@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ScoreSystem : MonoBehaviour {
     private static int score = 0;
+    private int addtoscore = 0;
     
 	// Use this for initialization
 	void Start () {
@@ -20,16 +21,21 @@ public class ScoreSystem : MonoBehaviour {
     
     public void IncrementScore()
     {
-        score++;
+       
+        
+            addtoscore++;
+            score++;
+        
        
     }
     public void InvokeScore()
     {
-        InvokeRepeating("IncrementScore", 2, 3);
+        InvokeRepeating("IncrementScore", 2, 4);
     }
 
     public void CancelScoreInvoke()
     {
-        CancelInvoke();
+
+        CancelInvoke("IncrementScore");
     }
 }

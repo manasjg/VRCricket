@@ -20,11 +20,15 @@ public class SelectFielder : MonoBehaviour {
         {
             StartCoroutine(GetClosestFielder());
         }
+        if (!ballhit)
+        {
+            StopAllCoroutines();
+        }
     }
 
     public IEnumerator GetClosestFielder()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         foreach (GameObject Fielder in (GameObject.FindGameObjectsWithTag("Fielder")))
         {

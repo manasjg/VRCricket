@@ -37,7 +37,7 @@ public class BallLaunch : MonoBehaviour {
     {
         
         GetComponent<Rigidbody>().AddTorque(-transform.forward * spin*0.4f);
-        if (collision.gameObject.name != "Ground")
+        if (collision.gameObject.name != "Ground" && collision.gameObject.tag != "Fielder") 
         {
           foreach(GameObject Fielder in (GameObject.FindGameObjectsWithTag("Fielder")))
             {
@@ -45,6 +45,7 @@ public class BallLaunch : MonoBehaviour {
                 
                 
             }
+            
             GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreSystem>().InvokeScore();
           
 
